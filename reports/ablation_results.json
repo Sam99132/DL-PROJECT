@@ -1,0 +1,94 @@
+{
+  "ablation_1_embeddings": [
+    {
+      "configuration": "Standard Entity Embeddings",
+      "val_rmse": 1.9333,
+      "val_mae": 0.8964,
+      "val_wape_pct": 65.79,
+      "val_rmsse": 0.5422
+    },
+    {
+      "configuration": "Low-Dimensional Embeddings",
+      "val_rmse": 1.9184,
+      "val_mae": 0.8722,
+      "val_wape_pct": 64.02,
+      "val_rmsse": 0.538
+    }
+  ],
+  "ablation_2_regularization": [
+    {
+      "configuration": "Full Regularization (Dropout=0.2, BatchNorm=True, L2=1e-4)",
+      "val_rmse": 1.9576,
+      "val_mae": 0.8981,
+      "val_wape_pct": 65.92,
+      "val_rmsse": 0.549
+    },
+    {
+      "configuration": "No Dropout (Dropout=0.0, BatchNorm=True, L2=1e-4)",
+      "val_rmse": 1.9303,
+      "val_mae": 0.9124,
+      "val_wape_pct": 66.97,
+      "val_rmsse": 0.5413
+    },
+    {
+      "configuration": "No BatchNorm (Dropout=0.2, BatchNorm=False, L2=1e-4)",
+      "val_rmse": 1.8783,
+      "val_mae": 0.9169,
+      "val_wape_pct": 67.3,
+      "val_rmsse": 0.5267
+    },
+    {
+      "configuration": "Unregularized Baseline (Dropout=0.0, BatchNorm=False, L2=0.0)",
+      "val_rmse": 1.9148,
+      "val_mae": 0.8781,
+      "val_wape_pct": 64.45,
+      "val_rmsse": 0.537
+    }
+  ],
+  "ablation_3_architecture": [
+    {
+      "configuration": "Shallow MLP (2 Layers: [128, 64])",
+      "val_rmse": 1.915,
+      "val_mae": 0.8762,
+      "val_wape_pct": 64.31,
+      "val_rmsse": 0.537
+    },
+    {
+      "configuration": "Standard Deep MLP (4 Layers: [256, 128, 64, 32])",
+      "val_rmse": 1.9333,
+      "val_mae": 0.8904,
+      "val_wape_pct": 65.36,
+      "val_rmsse": 0.5422
+    },
+    {
+      "configuration": "Residual MLP (3 Blocks, Dim=128)",
+      "val_rmse": 1.9269,
+      "val_mae": 0.8848,
+      "val_wape_pct": 64.95,
+      "val_rmsse": 0.5404
+    }
+  ],
+  "ablation_4_loss_functions": [
+    {
+      "configuration": "Huber / Smooth L1 Loss (delta=1.0)",
+      "val_rmse": 1.8845,
+      "val_mae": 0.8685,
+      "val_wape_pct": 63.75,
+      "val_rmsse": 0.5285
+    },
+    {
+      "configuration": "Mean Squared Error (MSE Loss)",
+      "val_rmse": 1.9228,
+      "val_mae": 0.9068,
+      "val_wape_pct": 66.56,
+      "val_rmsse": 0.5392
+    },
+    {
+      "configuration": "Tweedie Deviance Loss (p=1.5)",
+      "val_rmse": 2.0151,
+      "val_mae": 0.9507,
+      "val_wape_pct": 69.78,
+      "val_rmsse": 0.5651
+    }
+  ]
+}

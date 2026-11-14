@@ -1,0 +1,25 @@
+{
+  "model_name": "NormalDemandMLP",
+  "total_parameters": 71083,
+  "trainable_parameters": 71083,
+  "architecture": [
+    256,
+    128,
+    64,
+    32
+  ],
+  "regularization": {
+    "dropout": 0.2,
+    "weight_decay": 0.0001,
+    "batch_norm": true
+  },
+  "training_time_seconds": 12.51,
+  "epochs_trained": 12,
+  "metrics": {
+    "rmse": 1.8254,
+    "mae": 0.8772,
+    "wape_pct": 66.24,
+    "rmsse": 0.5621,
+    "r2": 0.684
+  }
+}
