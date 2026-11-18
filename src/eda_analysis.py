@@ -11,11 +11,10 @@ Computes:
 7. Kalman Filter state-space demand tracking demonstration.
 """
 
-import json
+import warnings
 import numpy as np
 import pandas as pd
-from pathlib import Path
-from typing import Dict, Any, Tuple
+from typing import Dict, Any
 from statsmodels.tsa.stattools import adfuller, acf, pacf
 from filterpy.kalman import KalmanFilter
 
@@ -223,8 +222,10 @@ class M5ExploratoryAnalysis:
         # Differenced series
         diff_series = np.diff(total_series)
 
-        adf_raw = adfuller(total_series, autolag="AIC")
-        adf_diff = adfuller(diff_series, autolag="AIC")
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", category=FutureWarning)
+            adf_raw = adfuller(total_series, autolag="AIC")
+            adf_diff = adfuller(diff_series, autolag="AIC")
 
         acf_vals = acf(total_series, nlags=35)
         pacf_vals = pacf(total_series, nlags=35)
@@ -258,7 +259,9 @@ class M5ExploratoryAnalysis:
         state_stationarity = {}
         for state in ["CA", "TX", "WI"]:
             s_series = aggs["state"][state].values
-            adf_s = adfuller(s_series, autolag="AIC")
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", category=FutureWarning)
+                adf_s = adfuller(s_series, autolag="AIC")
             state_stationarity[state] = {
                 "adf_stat": round(float(adf_s[0]), 3),
                 "p_value": round(float(adf_s[1]), 5),

@@ -25,6 +25,14 @@ from src.models.kalman_filter_model import (
     compute_forecasting_metrics,
     compute_prediction_interval_metrics,
 )
+from src.models.deepar_model import (
+    GlobalDeepARForecaster,
+    GlobalDeepARNet,
+    DeepARDataProcessor,
+    compute_pinball_loss,
+    compute_deepar_probabilistic_metrics,
+)
+from src.models.deepar_visualization import M5DeepARVisualizer
 
 __all__ = [
     # Neural Network models
@@ -46,4 +54,11 @@ __all__ = [
     "M5KalmanPipeline",
     "compute_forecasting_metrics",
     "compute_prediction_interval_metrics",
+    # DeepAR Global Probabilistic Model
+    "GlobalDeepARForecaster",
+    "GlobalDeepARNet",
+    "DeepARDataProcessor",
+    "compute_pinball_loss",
+    "compute_deepar_probabilistic_metrics",
+    "M5DeepARVisualizer",
 ]

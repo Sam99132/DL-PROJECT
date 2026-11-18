@@ -1,12 +1,12 @@
 {
-  "evaluation_timestamp": "2026-11-16T09:04:04Z",
+  "evaluation_timestamp": "2026-11-18T05:47:39Z",
   "validation_horizon_days": 28,
   "validation_date_range": [
     "2016-03-28",
     "2016-04-24"
   ],
-  "total_series": 50,
-  "total_validation_observations": 1400,
+  "total_series": 4,
+  "total_validation_observations": 112,
   "state_space_model": {
     "architecture": "Local Level + Weekly Seasonality (Basic Structural Model)",
     "state_dimension": 7,
@@ -20,160 +20,100 @@
   },
   "overall_metrics": {
     "kalman_filter": {
-      "mae": 0.8492,
-      "rmse": 1.4445,
-      "wape": 0.7695,
-      "sum_actual": 1545.0,
-      "sum_abs_err": 1188.82,
-      "count": 1400,
+      "mae": 0.2182,
+      "rmse": 0.4489,
+      "wape": 1.3579,
+      "sum_actual": 18.0,
+      "sum_abs_err": 24.44,
+      "count": 112,
       "prediction_intervals": {
         "ci_95": {
-          "coverage": 0.935,
-          "mean_width": 3.5078,
-          "inside_count": 1309,
-          "total_count": 1400
+          "coverage": 0.9375,
+          "mean_width": 1.1531,
+          "inside_count": 105,
+          "total_count": 112
         },
         "ci_80": {
-          "coverage": 0.815,
-          "mean_width": 2.5636,
-          "inside_count": 1141,
-          "total_count": 1400
+          "coverage": 0.9196,
+          "mean_width": 0.7891,
+          "inside_count": 103,
+          "total_count": 112
         }
       }
     }
   },
   "category_breakdown": {
     "FOODS": {
-      "mae": 0.9988,
-      "rmse": 1.699,
-      "wape": 0.7288,
-      "sum_actual": 921.0,
-      "sum_abs_err": 671.18,
-      "count": 672,
-      "coverage_95": 0.9256,
-      "mean_width_95": 4.3042
+      "mae": 0.2726,
+      "rmse": 0.4903,
+      "wape": 1.5265,
+      "sum_actual": 10.0,
+      "sum_abs_err": 15.26,
+      "count": 56,
+      "coverage_95": 0.9643,
+      "mean_width_95": 1.2525
     },
     "HOBBIES": {
-      "mae": 0.4475,
-      "rmse": 0.8963,
-      "wape": 1.1996,
-      "sum_actual": 94.0,
-      "sum_abs_err": 112.77,
-      "count": 252,
-      "coverage_95": 0.9643,
-      "mean_width_95": 1.5931
+      "mae": 0.0858,
+      "rmse": 0.2623,
+      "wape": 1.2012,
+      "sum_actual": 2.0,
+      "sum_abs_err": 2.4,
+      "count": 28,
+      "coverage_95": 1.0,
+      "mean_width_95": 1.2111
     },
     "HOUSEHOLD": {
-      "mae": 0.8506,
-      "rmse": 1.2793,
-      "wape": 0.7639,
-      "sum_actual": 530.0,
-      "sum_abs_err": 404.88,
-      "count": 476,
-      "coverage_95": 0.9328,
-      "mean_width_95": 3.3972
+      "mae": 0.242,
+      "rmse": 0.5065,
+      "wape": 1.1292,
+      "sum_actual": 6.0,
+      "sum_abs_err": 6.78,
+      "count": 28,
+      "coverage_95": 0.8214,
+      "mean_width_95": 0.8965
     }
   },
   "store_breakdown": {
-    "WI_3": {
-      "mae": 2.1107,
-      "rmse": 3.3568,
-      "wape": 0.6716,
-      "sum_actual": 352.0,
-      "sum_abs_err": 236.39,
-      "count": 112,
-      "coverage_95": 0.9554,
-      "mean_width_95": 10.8244
-    },
     "TX_1": {
-      "mae": 0.6933,
-      "rmse": 1.0012,
-      "wape": 0.9281,
-      "sum_actual": 251.0,
-      "sum_abs_err": 232.95,
-      "count": 336,
-      "coverage_95": 0.9345,
-      "mean_width_95": 2.4845
-    },
-    "CA_4": {
-      "mae": 0.45,
-      "rmse": 0.7013,
-      "wape": 0.9264,
-      "sum_actual": 68.0,
-      "sum_abs_err": 63.0,
-      "count": 140,
-      "coverage_95": 0.9286,
-      "mean_width_95": 1.7131
-    },
-    "CA_2": {
-      "mae": 0.9976,
-      "rmse": 1.432,
-      "wape": 0.6471,
-      "sum_actual": 259.0,
-      "sum_abs_err": 167.59,
-      "count": 168,
-      "coverage_95": 0.8274,
-      "mean_width_95": 3.2616
-    },
-    "WI_1": {
-      "mae": 1.006,
-      "rmse": 1.566,
-      "wape": 0.5399,
-      "sum_actual": 313.0,
-      "sum_abs_err": 169.0,
-      "count": 168,
-      "coverage_95": 0.9702,
-      "mean_width_95": 5.1901
-    },
-    "CA_1": {
-      "mae": 0.6797,
-      "rmse": 0.9799,
-      "wape": 1.4203,
-      "sum_actual": 67.0,
-      "sum_abs_err": 95.16,
-      "count": 140,
-      "coverage_95": 0.9714,
-      "mean_width_95": 2.8865
-    },
-    "TX_2": {
-      "mae": 0.5268,
-      "rmse": 0.7077,
-      "wape": 1.4274,
-      "sum_actual": 31.0,
-      "sum_abs_err": 44.25,
-      "count": 84,
-      "coverage_95": 0.9405,
-      "mean_width_95": 1.869
+      "mae": 0.5033,
+      "rmse": 0.6673,
+      "wape": 1.5657,
+      "sum_actual": 9.0,
+      "sum_abs_err": 14.09,
+      "count": 28,
+      "coverage_95": 0.9643,
+      "mean_width_95": 2.0411
     },
     "TX_3": {
-      "mae": 0.3775,
-      "rmse": 0.4831,
-      "wape": 1.7617,
-      "sum_actual": 24.0,
-      "sum_abs_err": 42.28,
-      "count": 112,
+      "mae": 0.0419,
+      "rmse": 0.1884,
+      "wape": 1.1733,
+      "sum_actual": 1.0,
+      "sum_abs_err": 1.17,
+      "count": 28,
       "coverage_95": 0.9643,
-      "mean_width_95": 1.3927
+      "mean_width_95": 0.4639
     },
-    "CA_3": {
-      "mae": 1.3693,
-      "rmse": 2.002,
-      "wape": 0.7668,
-      "sum_actual": 100.0,
-      "sum_abs_err": 76.68,
-      "count": 56,
-      "coverage_95": 0.9464,
-      "mean_width_95": 4.512
+    "CA_1": {
+      "mae": 0.0858,
+      "rmse": 0.2623,
+      "wape": 1.2012,
+      "sum_actual": 2.0,
+      "sum_abs_err": 2.4,
+      "count": 28,
+      "coverage_95": 1.0,
+      "mean_width_95": 1.2111
     },
-    "WI_2": {
-      "mae": 0.7325,
-      "rmse": 0.9115,
-      "wape": 0.7691,
-      "sum_actual": 80.0,
-      "sum_abs_err": 61.53,
-      "count": 84,
-      "coverage_95": 0.9524,
-      "mean_width_95": 2.789
+    "WI_1": {
+      "mae": 0.242,
+      "rmse": 0.5065,
+      "wape": 1.1292,
+      "sum_actual": 6.0,
+      "sum_abs_err": 6.78,
+      "count": 28,
+      "coverage_95": 0.8214,
+      "mean_width_95": 0.8965
     }
   }
 }

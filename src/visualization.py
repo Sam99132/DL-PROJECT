@@ -318,7 +318,9 @@ class M5Visualizer:
         ax_kde.set_xlabel("Sell Price ($)")
         ax_kde.set_ylabel("Density")
         ax_kde.set_xlim(0, 20)
-        ax_kde.legend(loc="upper right", frameon=True, facecolor="white")
+        handles, labels = ax_kde.get_legend_handles_labels()
+        if handles:
+            ax_kde.legend(handles=handles, labels=labels, loc="upper right", frameon=True, facecolor="white")
 
         # Department Median & IQR Prices
         dept_prices = df_prices.sample(50000, random_state=42).copy()
@@ -326,7 +328,7 @@ class M5Visualizer:
         dept_order = sorted(dept_prices["dept_id"].dropna().unique())
 
         sns.boxplot(data=dept_prices, x="dept_id", y="sell_price", order=dept_order, ax=ax_dept,
-                    palette="Blues_r", showfliers=False)
+                    hue="dept_id", palette="Blues_r", showfliers=False, legend=False)
         ax_dept.set_title("Price Dispersion Across Retail Departments (Excluding Outliers)", fontweight="bold")
         ax_dept.set_xlabel("Department ID")
         ax_dept.set_ylabel("Sell Price ($)")
@@ -381,7 +383,6 @@ class M5Visualizer:
         fig, (ax_acf, ax_pacf) = plt.subplots(1, 2, figsize=(14, 5))
 
         acf_dict = stationarity_data["total_level"]["autocorrelations"]
-        pacf_dict = stationarity_data["total_level"]["partial_autocorrelations"]
 
         # Bar plot of key ACF lags
         lags = list(acf_dict.keys())

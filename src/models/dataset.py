@@ -8,7 +8,7 @@ and categorical entity representations for the M5 retail time series.
 import numpy as np
 import pandas as pd
 import torch
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 
@@ -50,8 +50,23 @@ class M5FeaturePipeline:
         n_series: int = 200,
         random_state: int = 42,
     ):
-        self.raw_dir = Path(raw_dir)
-        self.processed_dir = Path(processed_dir)
+        # Resolve raw_dir and processed_dir robustly across working directories
+        project_root = Path(__file__).resolve().parent.parent.parent
+        raw_p = Path(raw_dir)
+        if not raw_p.exists():
+            for cand in [Path("data/raw"), project_root / "data/raw", project_root / raw_dir]:
+                if cand.exists():
+                    raw_p = cand
+                    break
+        self.raw_dir = raw_p
+
+        proc_p = Path(processed_dir)
+        if not proc_p.exists():
+            for cand in [Path("data/processed"), project_root / "data/processed", project_root / processed_dir]:
+                if cand.exists():
+                    proc_p = cand
+                    break
+        self.processed_dir = proc_p
         self.n_series = n_series
         self.random_state = random_state
 

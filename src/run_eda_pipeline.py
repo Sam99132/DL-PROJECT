@@ -26,9 +26,6 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-import numpy as np
-import pandas as pd
-
 from src.data_loader import load_calendar, load_sell_prices, load_sales_train
 from src.data_quality import M5DataQualityAuditor
 from src.eda_analysis import M5ExploratoryAnalysis
@@ -105,6 +102,9 @@ def run_pipeline():
             "zero_percentage": kf_results["zero_percentage"],
             "mean_observed": kf_results["mean_observed"],
             "mean_filtered": kf_results["mean_filtered"],
+            "mean_demand": kf_results["mean_observed"],
+            "obs_variance": 4.0,       # R from demonstrate_kalman_filter
+            "process_variance": 0.05,   # Q[0,0] from demonstrate_kalman_filter
         },
     }
 
@@ -202,11 +202,12 @@ The Supplemental Nutrition Assistance Program (SNAP) injects massive purchasing 
 ## 5. Theoretical Justification for Kalman Filters & DeepAR
 
 ### Why the Kalman Filter for Phase 1?
-1. **Separation of Latent Demand from Observation Noise:** Daily sales observations z_t are noisy manifestations of an underlying, unobserved true demand state x_t. The measurement equation:
+1. **Empirical Demonstration:** Validated on sample series `{kf['sku_id']}` (historical mean demand: {kf['mean_demand']:.2f} units, observation noise R: {kf['obs_variance']:.3f}, process drift Q: {kf['process_variance']:.4f}).
+2. **Separation of Latent Demand from Observation Noise:** Daily sales observations z_t are noisy manifestations of an underlying, unobserved true demand state x_t. The measurement equation:
    z_t = H x_t + v_t,  v_t ~ N(0, R)
    allows filtering out high-frequency zero spikes while tracking true consumption velocity.
-2. **Recursive Bayesian Updating:** The state-space formulation enables instantaneous online updating (O(1) time complexity per observation) as new daily sales arrive without retraining the entire history.
-3. **Uncertainty Quantification:** The filter maintains the error covariance matrix P_t, providing exact confidence intervals for inventory safety stock calculations:
+3. **Recursive Bayesian Updating:** The state-space formulation enables instantaneous online updating (O(1) time complexity per observation) as new daily sales arrive without retraining the entire history.
+4. **Uncertainty Quantification:** The filter maintains the error covariance matrix P_t, providing exact confidence intervals for inventory safety stock calculations:
    Safety Stock = z_alpha * sqrt(H P_(t+1|t) H^T + R)
 
 ### Why DeepAR Global Models for Phase 2?

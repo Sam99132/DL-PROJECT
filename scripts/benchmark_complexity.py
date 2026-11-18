@@ -23,7 +23,6 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-import numpy as np
 import matplotlib.pyplot as plt
 import torch
 
@@ -48,8 +47,6 @@ def benchmark_latency(model: NormalDemandMLP, cat_dims: dict, num_cont: int, dev
     model.eval()
     batch_sizes = [1, 8, 16, 32, 64, 128, 256]
     latency_results = []
-
-    num_cats = len(cat_dims)
 
     print(f"\n[BENCHMARK] Profiling Inference Latency on Device: {device}...")
     print(f"{'Batch Size':>10} | {'Latency (ms)':>15} | {'Per-Sample (μs)':>15} | {'Throughput (samples/s)':>25}")

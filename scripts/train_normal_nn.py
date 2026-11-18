@@ -8,7 +8,6 @@ evaluates on the 28-day forecast horizon, and saves publication-grade figures an
 import sys
 import os
 import json
-import time
 from pathlib import Path
 
 os.environ["MPLCONFIGDIR"] = "/tmp/matplotlib"
@@ -20,7 +19,6 @@ if str(PROJECT_ROOT) not in sys.path:
 
 import numpy as np
 import matplotlib.pyplot as plt
-import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 
@@ -65,8 +63,8 @@ def plot_training_results(history: dict, y_true: np.ndarray, y_pred: np.ndarray,
 
     # Plot sample 100 validation points
     sample_indices = np.arange(min(120, len(y_true)))
-    ax3.plot(sample_indices, y_true[:120], color="#1f77b4", label="Ground Truth Demand ($y$)", linewidth=1.8, alpha=0.85)
-    ax3.plot(sample_indices, y_pred[:120], color="#d62728", linestyle="--", label="Normal NN Forecast ($\hat{y}$)", linewidth=1.8)
+    ax3.plot(sample_indices, y_true[:120], color="#1f77b4", label=r"Ground Truth Demand ($y$)", linewidth=1.8, alpha=0.85)
+    ax3.plot(sample_indices, y_pred[:120], color="#d62728", linestyle="--", label=r"Normal NN Forecast ($\hat{y}$)", linewidth=1.8)
     ax3.set_title("Actual vs. Predicted Daily Demand (Sample Trajectory)", fontsize=12, fontweight="bold")
     ax3.set_xlabel("Observation Index", fontsize=11)
     ax3.set_ylabel("Unit Sales Demand", fontsize=11)
@@ -78,7 +76,7 @@ def plot_training_results(history: dict, y_true: np.ndarray, y_pred: np.ndarray,
     ax4.hist(residuals, bins=40, color="#6baed6", edgecolor="black", alpha=0.75, density=True)
     ax4.axvline(0, color="red", linestyle="--", linewidth=1.5, label="Zero Bias Line")
     ax4.set_title(f"Prediction Residual Distribution (Mean: {np.mean(residuals):.3f})", fontsize=12, fontweight="bold")
-    ax4.set_xlabel("Residual ($y - \hat{y}$)", fontsize=11)
+    ax4.set_xlabel(r"Residual ($y - \hat{y}$)", fontsize=11)
     ax4.set_ylabel("Probability Density", fontsize=11)
     ax4.legend(frameon=True)
     ax4.grid(True, linestyle="--", alpha=0.6)
@@ -113,7 +111,7 @@ def main():
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=False)
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last=False)
 
-    print(f"\n[MODEL] Initializing NormalDemandMLP architecture...")
+    print("\n[MODEL] Initializing NormalDemandMLP architecture...")
     print(f"  Categorical Dimensions: {cat_dims}")
     print(f"  Continuous Features ({len(cont_cols)}): {cont_cols}")
 

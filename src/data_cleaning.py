@@ -20,7 +20,6 @@ if str(PROJECT_ROOT) not in sys.path:
 
 import numpy as np
 import pandas as pd
-from src.data_loader import reduce_mem_usage
 
 
 class M5DataCleaner:

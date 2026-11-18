@@ -55,18 +55,18 @@ Evaluated over 100 iterations per batch size:
 
 | Batch Size ($B$) | Batch Latency (ms) | Latency per SKU (μs) | Throughput (SKUs / sec) |
 | :---: | :---: | :---: | :---: |
-| 1 | 0.077 ms | 77.30 μs | **12,936.9** |
-| 8 | 0.135 ms | 16.85 μs | **59,333.4** |
-| 16 | 0.143 ms | 8.96 μs | **111,663.3** |
-| 32 | 0.154 ms | 4.81 μs | **207,942.4** |
-| 64 | 0.183 ms | 2.86 μs | **349,426.0** |
-| 128 | 0.218 ms | 1.70 μs | **586,553.9** |
-| 256 | 0.294 ms | 1.15 μs | **871,332.4** |
+| 1 | 0.067 ms | 66.82 μs | **14,964.7** |
+| 8 | 0.119 ms | 14.88 μs | **67,200.1** |
+| 16 | 0.132 ms | 8.23 μs | **121,501.7** |
+| 32 | 0.141 ms | 4.41 μs | **226,602.8** |
+| 64 | 0.175 ms | 2.73 μs | **366,331.0** |
+| 128 | 0.208 ms | 1.62 μs | **616,751.0** |
+| 256 | 0.279 ms | 1.09 μs | **916,102.9** |
 
 ---
 
 ## 4. Academic Evaluation Verdict (TC Check)
 
-1. **Sub-millisecond Single-SKU Latency:** At batch size $B=1$, the model responds in under **0.08 ms**, qualifying it for real-time edge or point-of-sale deployment.
-2. **High-Volume Throughput:** At batch size $B=256$, throughput achieves over **871,332 SKU forecasts per second**, meaning the entire Walmart chain (30,490 SKUs) can be forecasted in under **0.03 seconds**!
+1. **Sub-millisecond Single-SKU Latency:** At batch size $B=1$, the model responds in under **0.07 ms**, qualifying it for real-time edge or point-of-sale deployment.
+2. **High-Volume Throughput:** At batch size $B=256$, throughput achieves over **916,103 SKU forecasts per second**, meaning the entire Walmart chain (30,490 SKUs) can be forecasted in under **0.03 seconds**!
 3. **No Memory Bottlenecks:** With a memory footprint under 1 MB, the normal neural network exhibits zero risk of Out-of-Memory (OOM) errors during both training and inference.

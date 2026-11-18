@@ -1,0 +1,228 @@
+{
+  "evaluation_timestamp": "2026-11-18T05:47:34Z",
+  "validation_horizon_days": 28,
+  "validation_date_range": [
+    "2016-03-28",
+    "2016-04-24"
+  ],
+  "total_series": 4,
+  "total_validation_observations": 112,
+  "model_configuration": {
+    "architecture": "Global Autoregressive LSTM (DeepAR)",
+    "distribution": "gaussian",
+    "hidden_dim": 64,
+    "num_layers": 2,
+    "dropout": 0.1,
+    "learning_rate": 0.001,
+    "batch_size": 64,
+    "epochs": 1,
+    "context_length": 56,
+    "prediction_length": 28,
+    "stride": 14,
+    "n_samples": 5,
+    "device": "cpu",
+    "random_seed": 42,
+    "item_scale_normalization": "nu_i = 1.0 + mean(y_i)",
+    "non_negative_clipping": "max(0.0, y)",
+    "zero_leakage_guarantee": "strict_causal_monte_carlo_rollout"
+  },
+  "overall_metrics": {
+    "deepar": {
+      "mae": 0.7093,
+      "rmse": 1.0282,
+      "wape": 1.3697,
+      "sum_actual": 58.0,
+      "sum_abs_err": 79.44,
+      "count": 112,
+      "pinball_loss": {
+        "p10": 0.1493,
+        "p50": 0.3547,
+        "p90": 0.2117,
+        "mean": 0.2386
+      },
+      "prediction_intervals": {
+        "ci_80": {
+          "coverage": 0.5268,
+          "mean_width": 1.4075,
+          "inside_count": 59,
+          "total_count": 112
+        }
+      }
+    },
+    "baseline_benchmarks": {
+      "seasonal_naive": {
+        "mae": 1.1143,
+        "rmse": 2.603,
+        "wape": 0.9559,
+        "sum_actual": 1632.0,
+        "sum_abs_err": 1560.0,
+        "count": 1400
+      },
+      "gbdt_recursive": {
+        "mae": 0.9512,
+        "rmse": 2.2679,
+        "wape": 0.816,
+        "sum_actual": 1632.0,
+        "sum_abs_err": 1331.67,
+        "count": 1400
+      },
+      "kalman_filter": {
+        "mae": 0.2182,
+        "rmse": 0.4489,
+        "wape": 1.3579,
+        "sum_actual": 18.0,
+        "sum_abs_err": 24.44,
+        "count": 112,
+        "prediction_intervals": {
+          "ci_95": {
+            "coverage": 0.9375,
+            "mean_width": 1.1531,
+            "inside_count": 105,
+            "total_count": 112
+          },
+          "ci_80": {
+            "coverage": 0.9196,
+            "mean_width": 0.7891,
+            "inside_count": 103,
+            "total_count": 112
+          }
+        }
+      }
+    },
+    "relative_improvements": {
+      "vs_seasonal_naive": {
+        "mae_reduction_pct": 36.35,
+        "rmse_reduction_pct": 60.5,
+        "wape_reduction_pct": -43.29
+      },
+      "vs_gbdt_recursive": {
+        "mae_reduction_pct": 25.43,
+        "rmse_reduction_pct": 54.66,
+        "wape_reduction_pct": -67.86
+      },
+      "vs_kalman_filter": {
+        "mae_reduction_pct": -225.07,
+        "rmse_reduction_pct": -129.05,
+        "wape_reduction_pct": -0.87
+      }
+    }
+  },
+  "category_breakdown": {
+    "FOODS": {
+      "mae": 0.7093,
+      "rmse": 1.0282,
+      "wape": 1.3697,
+      "sum_actual": 58.0,
+      "sum_abs_err": 79.44,
+      "count": 112,
+      "pinball_loss": {
+        "p10": 0.1493,
+        "p50": 0.3547,
+        "p90": 0.2117,
+        "mean": 0.2386
+      },
+      "prediction_intervals": {
+        "ci_80": {
+          "coverage": 0.5268,
+          "mean_width": 1.4075,
+          "inside_count": 59,
+          "total_count": 112
+        }
+      }
+    }
+  },
+  "store_breakdown": {
+    "CA_4": {
+      "mae": 0.2363,
+      "rmse": 0.3214,
+      "wape": 0.0,
+      "sum_actual": 0.0,
+      "sum_abs_err": 6.62,
+      "count": 28,
+      "pinball_loss": {
+        "p10": 0.0288,
+        "p50": 0.1181,
+        "p90": 0.0654,
+        "mean": 0.0708
+      },
+      "prediction_intervals": {
+        "ci_80": {
+          "coverage": 0.6429,
+          "mean_width": 0.6215,
+          "inside_count": 18,
+          "total_count": 28
+        }
+      }
+    },
+    "TX_2": {
+      "mae": 0.6519,
+      "rmse": 0.8284,
+      "wape": 2.028,
+      "sum_actual": 9.0,
+      "sum_abs_err": 18.25,
+      "count": 28,
+      "pinball_loss": {
+        "p10": 0.1099,
+        "p50": 0.3259,
+        "p90": 0.1322,
+        "mean": 0.1893
+      },
+      "prediction_intervals": {
+        "ci_80": {
+          "coverage": 0.5,
+          "mean_width": 1.3091,
+          "inside_count": 14,
+          "total_count": 28
+        }
+      }
+    },
+    "WI_2": {
+      "mae": 1.1523,
+      "rmse": 1.5179,
+      "wape": 1.0755,
+      "sum_actual": 30.0,
+      "sum_abs_err": 32.26,
+      "count": 28,
+      "pinball_loss": {
+        "p10": 0.2486,
+        "p50": 0.5761,
+        "p90": 0.4023,
+        "mean": 0.409
+      },
+      "prediction_intervals": {
+        "ci_80": {
+          "coverage": 0.5,
+          "mean_width": 1.9261,
+          "inside_count": 14,
+          "total_count": 28
+        }
+      }
+    },
+    "WI_3": {
+      "mae": 0.7969,
+      "rmse": 1.0657,
+      "wape": 1.1744,
+      "sum_actual": 19.0,
+      "sum_abs_err": 22.31,
+      "count": 28,
+      "pinball_loss": {
+        "p10": 0.2097,
+        "p50": 0.3985,
+        "p90": 0.2471,
+        "mean": 0.2851
+      },
+      "prediction_intervals": {
+        "ci_80": {
+          "coverage": 0.4643,
+          "mean_width": 1.7732,
+          "inside_count": 13,
+          "total_count": 28
+        }
+      }
+    }
+  },
+  "training_losses": [
+    1.0575
+  ],
+  "execution_time_seconds": 0.9
+}

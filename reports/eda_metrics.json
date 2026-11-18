@@ -269,6 +269,9 @@
     "sku_id": "FOODS_1_012_CA_1_validation",
     "zero_percentage": 33.51,
     "mean_observed": 2.725,
-    "mean_filtered": 2.721
+    "mean_filtered": 2.721,
+    "mean_demand": 2.725,
+    "obs_variance": 4.0,
+    "process_variance": 0.05
   }
 }

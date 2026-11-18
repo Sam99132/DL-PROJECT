@@ -6,9 +6,6 @@ Project 5: Inventory Demand Forecasting via Kalman Filters and DeepAR Global Mod
 Phase 1: Dataset Collection, Data Quality, and Exploratory Data Analysis (EDA)
 """
 
-import os
-import sys
-import time
 import urllib.request
 import numpy as np
 import pandas as pd

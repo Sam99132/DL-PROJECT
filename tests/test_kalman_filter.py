@@ -135,7 +135,7 @@ class TestDataIntegrity:
         fc_original = fc.predict(horizon=28)
 
         # Corrupt the validation series in-place (simulate tampered labels)
-        val_y_tampered = val_y * 10.0 + 500.0   # wildly different values
+        val_y[:] = val_y * 10.0 + 500.0   # wildly different values
 
         # Forecast must be identical because fit() already stored x_post, P_post
         fc_after = fc.predict(horizon=28)

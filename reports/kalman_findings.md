@@ -2,8 +2,8 @@
 **Project:** DL-PROJECT — Inventory Demand Forecasting (M5 Walmart Dataset)
 **Author Contribution:** Person 3 — Structural State-Space Kalman Filter per SKU
 **Evaluation Horizon:** `2016-03-28` → `2016-04-24` (28 days)
-**Series Pool:** 50 Product-Store SKUs
-**Generated:** 2026-11-16T09:04:04Z
+**Series Pool:** 4 Product-Store SKUs
+**Generated:** 2026-11-18T05:47:39Z
 
 ---
 
@@ -69,13 +69,14 @@ All noise parameters are derived strictly from training observations — zero va
 
 | Parameter | Formula | Rationale |
 |:---|:---|:---|
-| $R$ (obs. noise) | $\max(0.05,\; 0.75 \cdot \text{Var}(y_{1:T}))$ | Dominates short-term demand volatility |
-| $q_\mu$ (level noise) | $\max(10^{-4},\; 0.005 \cdot \text{Var}(y_{1:T}))$ | Slow stochastic drift in mean demand |
-| $q_s$ (seasonal noise) | $\max(10^{-5},\; 0.001 \cdot \text{Var}(y_{1:T}))$ | Smooth seasonal pattern evolution |
+| $R$ (obs. noise) | $\max(0.05,\; 0.75 \cdot \text{Var}(y_{1:T}))$ | Dominates short-term demand volatility (ratio: 0.75) |
+| $q_\mu$ (level noise) | $\max(10^{-4},\; 0.005 \cdot \text{Var}(y_{1:T}))$ | Slow stochastic drift in mean demand (ratio: 0.005) |
+| $q_s$ (seasonal noise) | $\max(10^{-5},\; 0.001 \cdot \text{Var}(y_{1:T}))$ | Smooth seasonal pattern evolution (ratio: 0.001) |
 
-**Missing observation strategy:** Predict-only step (no measurement update). Covariance expands naturally.
-**Zero demand:** Treated as a valid $y_t = 0$ observation (not a stockout / missing entry).
-**Non-negativity:** Point forecasts and lower PI bounds clipped at $\max(0,\; \cdot)$.
+**Architecture:** Local Level + Weekly Seasonality (Basic Structural Model) (7-dim state space).  
+**Missing observation strategy:** Predict-only step (no measurement update). Covariance expands naturally.  
+**Zero demand:** Treated as a valid $y_t = 0$ observation (not a stockout / missing entry).  
+**Non-negativity:** Point forecasts and lower PI bounds clipped at $\max(0,\; \cdot)$.  
 
 ---
 
@@ -85,18 +86,18 @@ All noise parameters are derived strictly from training observations — zero va
 
 | Metric | Value |
 |:---|:---:|
-| **MAE** | **0.8492** units |
-| **RMSE** | **1.4445** units |
-| **WAPE** | **76.95%** |
-| Total Series | 50 SKUs |
-| Validation Obs | 1,400 |
+| **MAE** | **0.2182** units |
+| **RMSE** | **0.4489** units |
+| **WAPE** | **135.79%** |
+| Total Series | 4 SKUs |
+| Validation Obs | 112 |
 
 ### Prediction Interval Performance
 
 | Interval | Target | Empirical Coverage | Mean Width |
 |:---|:---:|:---:|:---:|
-| **95% PI** | 95.0% | **93.50%** | 3.5078 units |
-| **80% PI** | 80.0% | **81.50%** | 2.5636 units |
+| **95% PI** | 95.0% | **93.75%** | 1.1531 units |
+| **80% PI** | 80.0% | **91.96%** | 0.7891 units |
 
 > Kalman provides **exact analytic covariance propagation** $\mathbf{P}_{T+h|T}$,
 > ensuring well-calibrated prediction intervals without Monte Carlo sampling.
@@ -105,9 +106,9 @@ All noise parameters are derived strictly from training observations — zero va
 
 | Category | MAE | RMSE | WAPE | 95% PI Coverage |
 |:---|:---:|:---:|:---:|:---:|
-| **FOODS** | 0.9988 | 1.6990 | 72.88% | 92.6% |
-| **HOBBIES** | 0.4475 | 0.8963 | 119.96% | 96.4% |
-| **HOUSEHOLD** | 0.8506 | 1.2793 | 76.39% | 93.3% |
+| **FOODS** | 0.2726 | 0.4903 | 152.65% | 96.4% |
+| **HOBBIES** | 0.0858 | 0.2623 | 120.12% | 100.0% |
+| **HOUSEHOLD** | 0.2420 | 0.5065 | 112.92% | 82.1% |
 
 ---
 
@@ -125,7 +126,7 @@ All noise parameters are derived strictly from training observations — zero va
 
 1. **No data leakage** — all parameters estimated on training history only; predict() uses
    no ground-truth validation data whatsoever.
-2. **Interpretable state** — $\mu_t$ gives the latent consumption rate; $s_{j,t}$ quantifies
+2. **Interpretable state** — $\mu_t$ gives the latent consumption rate; $s_{{j,t}}$ quantifies
    day-of-week seasonal lift/drag, both readable directly.
 3. **Uncertainty is analytic** — covariance $P_t$ is propagated exactly, no sampling needed.
 4. **Intermittent demand robust** — zero sales are valid observations; NaN gaps expand

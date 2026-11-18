@@ -9,9 +9,8 @@ Provides technically sound architectures combining the Normal Neural Network wit
 """
 
 import numpy as np
-import torch
 import torch.nn as nn
-from typing import Dict, Any, Optional, Tuple
+from typing import Tuple
 
 
 class HybridForecaster:

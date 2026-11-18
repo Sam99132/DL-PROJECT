@@ -34,14 +34,12 @@ Options:
 
 import sys
 import argparse
-import json
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-import pandas as pd
 from src.models.kalman_filter_model import M5KalmanPipeline
 from src.models.kalman_visualization import M5KalmanVisualizer
 
@@ -130,13 +128,14 @@ All noise parameters are derived strictly from training observations — zero va
 
 | Parameter | Formula | Rationale |
 |:---|:---|:---|
-| $R$ (obs. noise) | $\\max(0.05,\\; 0.75 \\cdot \\text{{Var}}(y_{{1:T}}))$ | Dominates short-term demand volatility |
-| $q_\\mu$ (level noise) | $\\max(10^{{-4}},\\; 0.005 \\cdot \\text{{Var}}(y_{{1:T}}))$ | Slow stochastic drift in mean demand |
-| $q_s$ (seasonal noise) | $\\max(10^{{-5}},\\; 0.001 \\cdot \\text{{Var}}(y_{{1:T}}))$ | Smooth seasonal pattern evolution |
+| $R$ (obs. noise) | $\\max(0.05,\\; 0.75 \\cdot \\text{{Var}}(y_{{1:T}}))$ | Dominates short-term demand volatility (ratio: {ss.get('observation_noise_ratio', 0.75)}) |
+| $q_\\mu$ (level noise) | $\\max(10^{{-4}},\\; 0.005 \\cdot \\text{{Var}}(y_{{1:T}}))$ | Slow stochastic drift in mean demand (ratio: {ss.get('level_process_noise_ratio', 0.005)}) |
+| $q_s$ (seasonal noise) | $\\max(10^{{-5}},\\; 0.001 \\cdot \\text{{Var}}(y_{{1:T}}))$ | Smooth seasonal pattern evolution (ratio: {ss.get('seasonal_process_noise_ratio', 0.001)}) |
 
-**Missing observation strategy:** Predict-only step (no measurement update). Covariance expands naturally.
-**Zero demand:** Treated as a valid $y_t = 0$ observation (not a stockout / missing entry).
-**Non-negativity:** Point forecasts and lower PI bounds clipped at $\\max(0,\\; \\cdot)$.
+**Architecture:** {ss.get('architecture', 'Local Level + Weekly Seasonality')} ({ss.get('state_dimension', 7)}-dim state space).  
+**Missing observation strategy:** Predict-only step (no measurement update). Covariance expands naturally.  
+**Zero demand:** Treated as a valid $y_t = 0$ observation (not a stockout / missing entry).  
+**Non-negativity:** Point forecasts and lower PI bounds clipped at $\\max(0,\\; \\cdot)$.  
 
 ---
 
@@ -173,7 +172,7 @@ All noise parameters are derived strictly from training observations — zero va
             f"{m['wape']*100:.2f}% | {m.get('coverage_95',0)*100:.1f}% |\n"
         )
 
-    md += f"""
+    md += """
 ---
 
 ## 🖼️ Figures Generated

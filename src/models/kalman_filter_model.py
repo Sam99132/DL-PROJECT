@@ -53,7 +53,7 @@ import json
 import time
 import logging
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Any, Union
+from typing import Dict, Optional, Tuple, Any, Union
 
 import numpy as np
 import pandas as pd

@@ -21,7 +21,6 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-import seaborn as sns
 import numpy as np
 import pandas as pd
 
@@ -331,9 +330,9 @@ class M5KalmanVisualizer:
                 )
             ax.set_ylim(0, max(values) * 1.25)
 
-        _bar_panel(ax1, maes,  "Mean Absolute Error (MAE) ↓",  "MAE (Units)", ".4f")
-        _bar_panel(ax2, rmses, "Root Mean Squared Error (RMSE) ↓", "RMSE (Units)", ".4f")
-        _bar_panel(ax3, wapes, "Weighted Abs % Error (WAPE) ↓", "WAPE (%)", ".2f")
+        _bar_panel(ax1, maes,  "Mean Absolute Error (MAE - Lower is Better)",  "MAE (Units)", ".4f")
+        _bar_panel(ax2, rmses, "Root Mean Squared Error (RMSE - Lower is Better)", "RMSE (Units)", ".4f")
+        _bar_panel(ax3, wapes, "Weighted Abs % Error (WAPE - Lower is Better)", "WAPE (%)", ".2f")
 
         # Category-level WAPE breakdown
         categories = sorted(cat_data.keys())

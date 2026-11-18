@@ -8,16 +8,14 @@ Conducts controlled experimental comparisons across:
 4. Loss Formulations (Huber vs. MSE vs. Tweedie Deviance)
 """
 
-import time
 import json
-import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from pathlib import Path
 from typing import Dict, Any, List
 
 from src.models.feedforward_nn import NormalDemandMLP, ResidualDemandMLP, TweedieDevianceLoss
-from src.models.trainer import DemandTrainer, calculate_metrics
+from src.models.trainer import DemandTrainer
 
 
 class M5AblationRunner:
@@ -37,7 +35,14 @@ class M5AblationRunner:
         self.train_loader = train_loader
         self.val_loader = val_loader
         self.epochs_per_trial = epochs_per_trial
-        self.output_dir = Path(output_dir)
+        project_root = Path(__file__).resolve().parent.parent.parent
+        out_p = Path(output_dir)
+        if not out_p.is_absolute() and not out_p.exists():
+            for cand in [Path("reports"), project_root / "reports", project_root / output_dir]:
+                if cand.exists():
+                    out_p = cand
+                    break
+        self.output_dir = out_p
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.results: Dict[str, Any] = {}
 

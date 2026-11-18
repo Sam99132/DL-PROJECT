@@ -7,7 +7,6 @@ a multi-panel publication bar chart comparing configurations.
 
 import sys
 import os
-import json
 from pathlib import Path
 
 os.environ["MPLCONFIGDIR"] = "/tmp/matplotlib"

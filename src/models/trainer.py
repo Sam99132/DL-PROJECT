@@ -83,7 +83,14 @@ class DemandTrainer:
         self.model = model.to(self.device)
         self.criterion = criterion.to(self.device)
         self.clip_grad_norm = clip_grad_norm
-        self.checkpoint_dir = Path(checkpoint_dir)
+        project_root = Path(__file__).resolve().parent.parent.parent
+        chk_p = Path(checkpoint_dir)
+        if not chk_p.is_absolute() and not chk_p.exists():
+            for cand in [Path("reports/checkpoints"), project_root / "reports/checkpoints", project_root / checkpoint_dir]:
+                if cand.parent.exists():
+                    chk_p = cand
+                    break
+        self.checkpoint_dir = chk_p
         self.checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
         # AdamW with Decoupled Weight Decay Regularization
